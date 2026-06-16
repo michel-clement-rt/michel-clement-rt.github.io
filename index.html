@@ -5,41 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio - Accueil</title>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="templates/style.css" />
 </head>
 <body class="w3-black">
-  <nav class="w3-sidebar w3-bar-block w3-collapse w3-black w3-card w3-animate-left" style="width:220px;" id="mySidebar">
-    <h3 class="w3-bar-item theme-pink">Mon Portfolio</h3>
-    <a href="index.html" class="w3-bar-item w3-button w3-hover-pink">Accueil</a>
-    <a href="about.html" class="w3-bar-item w3-button w3-hover-pink">À propos</a>
-    <a href="projets.html" class="w3-bar-item w3-button w3-hover-pink">Projets</a>
-    <a href="competences.html" class="w3-bar-item w3-button w3-hover-pink">Compétences</a>
-    <a href="experiences.html" class="w3-bar-item w3-button w3-hover-pink">Expériences</a>
-    <a href="contact.html" class="w3-bar-item w3-button w3-hover-pink">Contact</a>
-    <button class="close-btn" onclick="closeSidebar()">✕</button>
+  <nav class="header-nav">
+    <h2>Mon Portfolio</h2>
+    <ul>
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="templates/about.html">À propos</a></li>
+      <li><a href="templates/projets.html">Projets</a></li>
+      <li><a href="templates/competences.html">Compétences</a></li>
+      <li><a href="templates/experiences.html">Expériences</a></li>
+      <li><a href="templates/contact.html">Contact</a></li>
+    </ul>
   </nav>
 
-  <header class="w3-bar w3-black w3-hide-large w3-large">
-    <button class="w3-bar-item w3-button w3-pink w3-hover-black" onclick="w3_open()">☰ Menu</button>
-    <span class="w3-bar-item">Portfolio</span>
-  </header>
-
-  <div class="w3-main" style="margin-left:220px;" id="main">
+  <div class="w3-main" id="main">
     <div class="w3-container w3-padding-32 hero-section">
       <div class="w3-row-padding">
         <div class="w3-half">
-          <span class="top-label">Bonjour, bienvenue sur mon site web</span>
-          <h1 class="w3-jumbo w3-text-white">Je suis Clément MICHEL</h1>
-          <p class="w3-large">Étudiant en <strong>BUT Réseaux et Télécommunications</strong>, [Lorem Ipsum]</p>
-          <p class="w3-text-light-grey">[Lorem Ipsum]</p>
+          <span class="top-label">Bonjour, bienvenue sur mon site web !</span>
+          <h1 class="w3-xxlarge w3-text-white">Je suis Clément MICHEL</h1>
+          <p class="w3-large">Étudiant en <strong>BUT Réseaux et Télécommunications</strong>, ce sont ces technologies <em>de l'ombre</em> qui me passionnent et me poussent à mettre ma rigueur et ma polyvalence au service de projets innovants.</em></p>
+          <p class="w3-text-light-grey">Curieux et motivé, je cherche à approfondir mes connaissances en réseaux, cybersécurité et technologies émergentes pour toujours en apprendre plus.</p>
           <div class="cta-buttons">
-            <a href="contact.html" class="w3-button w3-pink w3-hover-black">Contactez-moi ici</a>
-            <a href="cv.html" class="w3-button w3-black w3-border w3-border-pink w3-hover-pink">Téléchargez mon CV</a>
+            <a href="templates/contact.html" class="w3-button w3-pink w3-hover-black">Contactez-moi ici</a>
+            <a href="templates/cv.html" class="w3-button w3-black w3-border w3-border-pink w3-hover-pink">Téléchargez mon CV</a>
           </div>
         </div>
         <div class="w3-half photo-block">
           <div class="photo-placeholder w3-center w3-display-container">
-            <img style="width: 50%; height: 50%;" src="IMG_20251212_102615.jpg">
+            <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 24px;" src="pictures/IMG_20251212_102615.jpg">
           </div>
         </div>
       </div>
@@ -49,20 +45,42 @@
       <div class="w3-row-padding w3-margin-top">
         <div class="w3-third w3-margin-bottom">
           <div class="w3-card w3-padding w3-hover-shadow" style="background: rgba(255, 45, 149, 0.08); border: 1px solid rgba(255, 45, 149, 0.18); border-radius: 20px;">
-            <h3>[Titre 1]</h3>
-            <p>[Lorem Ipsum]</p>
+            <h3>Compétences</h3>
+            <p>
+              <ul>
+                <li>Réseaux (Routage OSPF, EIGRP, DHCP, DNS, NAT, ACL, VLAN, VLSM, IPv4/IPv6, HSRP, STP, ASA)</li>
+                <li>DevWeb</li>
+                <li>Anglais (C1) / Allemand (DSDII C1)</li>
+              </ul>
+            </p>
           </div>
         </div>
         <div class="w3-third w3-margin-bottom">
           <div class="w3-card w3-padding w3-hover-shadow" style="background: rgba(255, 45, 149, 0.08); border: 1px solid rgba(255, 45, 149, 0.18); border-radius: 20px;">
-            <h3>[Titre 2]</h3>
-            <p>[Lorem Ipsum]</p>
+            <h3>Soft Skills</h3>
+            <p>
+              <ul>
+                <li>Polyvalence</li>
+                <li>Rigueur</li>
+                <li>Travail d'équipe</li>
+                <li>Curiosité</li>
+                <li>Autonomie</li>
+              </ul>
+            </p>
           </div>
         </div>
         <div class="w3-third w3-margin-bottom">
           <div class="w3-card w3-padding w3-hover-shadow" style="background: rgba(255, 45, 149, 0.08); border: 1px solid rgba(255, 45, 149, 0.18); border-radius: 20px;">
-            <h3>[Titre 3]</h3>
-            <p>[Lorem Ipsum]</p>
+            <h3>Passions</h3>
+            <p>
+              <ul>
+                <li>Informatique</li>
+                <li>Ingénérie sonore / mixage </li>
+                <li>Automobile</li>
+                <li>Horlogerie</li>
+                <li>Airsoft</li>
+              </ul>
+            </p>
           </div>
         </div>
       </div>
@@ -73,6 +91,6 @@
     </section>
   </div>
 
-  <script src="script.js"></script>
+  <script src="templates/script.js"></script>
 </body>
 </html>
