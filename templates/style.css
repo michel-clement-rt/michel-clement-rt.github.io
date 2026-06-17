@@ -181,15 +181,18 @@ body {
 }
 
 .project-row {
-  display: flex !important;
-  overflow-x: auto !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
   gap: 20px !important;
   padding-bottom: 10px !important;
+  width: 100% !important;
+  overflow-x: visible !important;
 }
 
 .project-card {
-  min-width: 250px !important;
-  height: 250px !important;
+  min-width: unset !important;
+  width: 100% !important;
+  height: 280px !important;
   background: rgba(255, 45, 149, 0.08) !important;
   border: 1px solid rgba(255, 45, 149, 0.18) !important;
   border-radius: 20px !important;
@@ -383,6 +386,25 @@ body {
 
 @media (hover: none), (pointer: coarse) {
   .mouse-halo { display: none; }
+}
+
+/* Responsive project cards for smaller screens (detached) */
+@media screen and (max-width: 768px) {
+  .project-row {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  }
+  .project-card {
+    height: 240px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .project-row {
+    grid-template-columns: 1fr !important;
+  }
+  .project-card {
+    height: 260px !important;
+  }
 }
 
 
