@@ -101,3 +101,129 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+//NEW CODE FOR WEBSITE APPEARANCE
+
+(function() {
+  'use strict';
+
+  // Respect user's reduced motion preference
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  function initReveals() {
+    const els = document.querySelectorAll('.project-card, .info-card, .hero-section, .photo-placeholder, .project-modal-content');
+    els.forEach(el => el.classList.add('reveal'));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  function initHeaderEffects() {
+    const headers = document.querySelectorAll('.header-nav h2');
+    headers.forEach(h => h.classList.add('gradient-text'));
+  }
+
+  function initPhotoParallax() {
+    const photo = document.querySelector('.photo-placeholder');
+    if (!photo) return;
+
+    let rect = photo.getBoundingClientRect();
+    window.addEventListener('resize', () => rect = photo.getBoundingClientRect());
+
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      photo.style.transform = `translate3d(${x * 8}px, ${y * 6}px, 0) rotate(${x * 2}deg)`;
+    });
+
+    photo.addEventListener('mouseleave', () => { photo.style.transform = ''; });
+  }
+
+  // Mouse halo that follows the cursor (detached)
+  function initMouseHalo() {
+    if (window.matchMedia && (window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+
+    let halo = document.querySelector('.mouse-halo');
+    if (!halo) {
+      halo = document.createElement('div');
+      halo.className = 'mouse-halo';
+      const inner = document.createElement('div'); inner.className = 'halo-inner';
+      halo.appendChild(inner);
+      document.body.appendChild(halo);
+    }
+
+    const inner = halo.querySelector('.halo-inner');
+    let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
+    let rafId = null;
+
+    function updatePosition() {
+      halo.style.setProperty('--mouse-x', mouseX + 'px');
+      halo.style.setProperty('--mouse-y', mouseY + 'px');
+      inner.style.left = mouseX + 'px';
+      inner.style.top = mouseY + 'px';
+      rafId = null;
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      if (!rafId) rafId = requestAnimationFrame(updatePosition);
+    }, { passive: true });
+
+    // support touchmove for mobile when pointer is coarse
+    document.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        mouseX = e.touches[0].clientX; mouseY = e.touches[0].clientY;
+        if (!rafId) rafId = requestAnimationFrame(updatePosition);
+      }
+    }, { passive: true });
+  }
+
+  // Mobile menu toggle injection (detached)
+  function initMobileMenu() {
+    const header = document.querySelector('.header-nav');
+    if (!header) return;
+
+    // create button if not present
+    let toggle = header.querySelector('.mobile-toggle');
+    if (!toggle) {
+      toggle = document.createElement('button');
+      toggle.className = 'mobile-toggle';
+      toggle.setAttribute('aria-label', 'Ouvrir le menu');
+      toggle.innerHTML = '☰';
+      header.insertBefore(toggle, header.querySelector('ul'));
+    }
+
+    toggle.addEventListener('click', (e) => {
+      header.classList.toggle('nav-open');
+    });
+
+    // close menu when clicking a link
+    header.addEventListener('click', (e) => {
+      if (e.target && e.target.matches('.header-nav ul li a')) {
+        header.classList.remove('nav-open');
+      }
+    });
+
+    // close on outside click
+    document.addEventListener('click', (e) => {
+      if (!header.contains(e.target)) header.classList.remove('nav-open');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initReveals();
+    initHeaderEffects();
+    initPhotoParallax();
+    initMouseHalo();
+    initMobileMenu();
+  });
+})();

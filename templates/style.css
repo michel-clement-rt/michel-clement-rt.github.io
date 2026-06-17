@@ -241,3 +241,148 @@ body {
     margin-top: 32px !important;
   }
 }
+
+/* //NEW CODE FOR WEBSITE APPEARANCE */
+:root {
+  --bg-1: #050405;
+  --bg-2: #070406;
+  --accent: #ff2d95;
+  --accent-soft: #ff80b3;
+  --glass: rgba(255,45,149,0.06);
+  --card-border: rgba(255,45,149,0.14);
+  --muted: #bdb3be;
+}
+
+/* Page backdrop with soft moving gradient */
+body {
+  background-image: radial-gradient(circle at 10% 10%, rgba(255,45,149,0.01), transparent 10%),
+                    linear-gradient(120deg, var(--bg-1), var(--bg-2));
+  background-attachment: fixed;
+  transition: background 0.6s ease, color 0.3s ease;
+}
+
+/* Modern glass cards and subtle borders */
+.project-card, .info-card, .project-modal-content, .footer-section {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Animated gradient text for titles */
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: gradientShift 6s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Reveal animation used by JS (detached) */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px) scale(0.995);
+  transition: opacity 0.7s cubic-bezier(.2,.9,.3,1), transform 0.7s cubic-bezier(.2,.9,.3,1);
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Floating micro motion for project cards */
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.project-card:hover {
+  animation: floaty 4s ease-in-out infinite;
+}
+
+/* Enhanced buttons (detached) */
+.w3-button.w3-pink {
+  background: linear-gradient(180deg, var(--accent), var(--accent-soft));
+  color: #0b0008 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 6px 20px rgba(255,45,149,0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.w3-button.w3-pink:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 34px rgba(255,45,149,0.18); }
+
+/* Scrollbar for horizontal project row */
+.project-row::-webkit-scrollbar { height: 10px; }
+.project-row::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--accent), var(--accent-soft)); border-radius: 10px; }
+
+/* Photo placeholder subtle frame and parallax transform origin */
+.photo-placeholder {
+  transition: transform 0.35s cubic-bezier(.2,.9,.3,1), box-shadow 0.35s ease;
+  transform-origin: center center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.photo-placeholder:hover { box-shadow: 0 18px 50px rgba(255,45,149,0.06); }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .project-card:hover, .w3-button.w3-pink { animation: none !important; transition: none !important; }
+}
+
+/* Mobile menu toggle (detached) */
+.header-nav .mobile-toggle {
+  display: none;
+  background: transparent;
+  border: 0;
+  color: var(--accent);
+  font-size: 20px;
+  padding: 12px 18px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+  .header-nav .mobile-toggle { display: block; }
+  .header-nav.nav-open ul {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    background: linear-gradient(180deg, rgba(0,0,0,0.6), rgba(12,6,12,0.9));
+    border-top: 1px solid rgba(255,45,149,0.06);
+  }
+  .header-nav.nav-open ul li a { padding: 12px 18px !important; }
+}
+
+/* Mouse halo overlay (detached) */
+.mouse-halo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  mix-blend-mode: screen;
+  transition: opacity 0.35s ease;
+}
+.mouse-halo .halo-inner {
+  position: absolute;
+  left: var(--mouse-x, 50%);
+  top: var(--mouse-y, 50%);
+  width: 420px;
+  height: 420px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,45,149,0.18) 0%, rgba(255,45,149,0.12) 8%, rgba(255,45,149,0.06) 20%, transparent 50%);
+  border-radius: 50%;
+  filter: blur(18px);
+  transition: transform 0.12s linear;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .mouse-halo { display: none; }
+}
+
+
